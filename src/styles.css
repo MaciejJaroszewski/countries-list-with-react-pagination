@@ -3,6 +3,19 @@
   text-align: center;
   max-width: 960px;
   margin: 0 auto;
+  min-height: 100vh;
+}
+
+.region-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+#regionSelector {
+  width: 50%;
+  margin-left: 8px;
 }
 
 .countries-container {

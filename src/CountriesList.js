@@ -1,18 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-import { countries } from "./const";
 import CountryItem from "./CountryItem";
 import Pagination from "./Pagination";
 
 class CountriesList extends React.Component {
   state = {
-    countries,
     pageIndex: 1,
     countriesOnPage: 6
   };
 
   get totalPages() {
-    const { countries, countriesOnPage } = this.state;
+    const { countriesOnPage } = this.state;
+    const { countries } = this.props;
     const countriesCount = countries.length;
     return Math.ceil(countriesCount / countriesOnPage);
   }
@@ -38,9 +38,9 @@ class CountriesList extends React.Component {
   }
 
   render() {
-    const { countries, countriesOnPage, pageIndex } = this.state;
+    const { countriesOnPage, pageIndex } = this.state;
+    const { countries } = this.props;
     const offset = (pageIndex - 1) * countriesOnPage;
-
     const source = countries.slice(offset, offset + countriesOnPage);
 
     return (
@@ -56,5 +56,9 @@ class CountriesList extends React.Component {
     );
   }
 }
+
+CountriesList.propTypes = {
+  countries: PropTypes.array
+};
 
 export default CountriesList;
