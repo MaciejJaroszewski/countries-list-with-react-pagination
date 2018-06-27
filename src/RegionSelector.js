@@ -12,7 +12,6 @@ class RegionSelector extends React.Component {
   };
 
   render() {
-    const { region } = this.props;
     const regions = Object.values(REGIONS);
     return (
       <FormGroup controlId="regionSelector" bsClass="region-selector">

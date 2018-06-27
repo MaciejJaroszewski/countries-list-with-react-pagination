@@ -20,7 +20,7 @@ class CustomPagination extends React.Component {
 
   onSearchChange = ev => {
     const { target: { value } = {} } = ev;
-    // for training purpose - no sanitaize input
+    // for training purpose - no sanitaize input value
     this.props.onSearchChange(value);
   };
 
@@ -115,10 +115,6 @@ class CustomPagination extends React.Component {
     );
   }
 }
-
-// <InputGroup.Button>
-//   <Button>Search</Button>
-// </InputGroup.Button>
 
 CustomPagination.propTypes = {
   pageIndex: PropTypes.number.isRequired,

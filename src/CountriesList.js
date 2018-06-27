@@ -24,7 +24,11 @@ class CountriesList extends React.Component {
       pageIndex: 1,
       countriesOnPage
     });
-  onSearchChange = search => this.setState({ search });
+  onSearchChange = search =>
+    this.setState({
+      pageIndex: 1,
+      search
+    });
 
   filterSearched = ({ name }) => {
     const { search } = this.state;
