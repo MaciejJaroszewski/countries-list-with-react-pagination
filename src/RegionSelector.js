@@ -19,7 +19,7 @@ class RegionSelector extends React.Component {
         <ControlLabel>Select region</ControlLabel>
         <FormControl componentClass="select" onChange={this.onRegionSelect}>
           {regions.map((item, index) => (
-            <option key={index} value={item} selected={item === region}>
+            <option key={index} value={item}>
               {item.capitalize()}
             </option>
           ))}

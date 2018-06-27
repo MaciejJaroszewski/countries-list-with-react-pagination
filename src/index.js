@@ -10,7 +10,7 @@ import "./styles.css";
 
 class App extends React.Component {
   state = {
-    region: REGIONS.europe,
+    region: REGIONS.africa,
     countries: []
   };
 
@@ -33,7 +33,6 @@ class App extends React.Component {
 
   render() {
     const { countries, region } = this.state;
-    const anyCountries = countries.length > 0;
     return (
       <div className="App">
         <h1>Countries</h1>

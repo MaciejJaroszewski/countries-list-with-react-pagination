@@ -7,7 +7,8 @@ import Pagination from "./Pagination";
 class CountriesList extends React.Component {
   state = {
     pageIndex: 1,
-    countriesOnPage: 6
+    countriesOnPage: 6,
+    search: ""
   };
 
   get totalPages() {
@@ -23,14 +24,24 @@ class CountriesList extends React.Component {
       pageIndex: 1,
       countriesOnPage
     });
+  onSearchChange = search => this.setState({ search });
+
+  filterSearched = ({ name }) => {
+    const { search } = this.state;
+    const searchedName = search.toLowerCase();
+    const lowercaseName = name.toLowerCase();
+    return lowercaseName.includes(searchedName);
+  };
 
   renderPagination() {
     const { totalPages } = this;
-    const { pageIndex } = this.state;
+    const { pageIndex, search } = this.state;
     return (
       <Pagination
         pageIndex={pageIndex}
         totalPages={totalPages}
+        search={search}
+        onSearchChange={this.onSearchChange}
         onPageIndexChange={this.onPageIndexChange}
         onCountriesOnPageChange={this.onCountriesOnPageChange}
       />
@@ -40,8 +51,9 @@ class CountriesList extends React.Component {
   render() {
     const { countriesOnPage, pageIndex } = this.state;
     const { countries } = this.props;
+    const maybeFilteredSource = countries.filter(this.filterSearched);
     const offset = (pageIndex - 1) * countriesOnPage;
-    const source = countries.slice(offset, offset + countriesOnPage);
+    const source = maybeFilteredSource.slice(offset, offset + countriesOnPage);
 
     return (
       <div className="countries-container">
@@ -51,7 +63,6 @@ class CountriesList extends React.Component {
             <CountryItem countryData={item} key={index} />
           ))}
         </div>
-        {this.renderPagination()}
       </div>
     );
   }

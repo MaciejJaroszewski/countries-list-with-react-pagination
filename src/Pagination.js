@@ -1,8 +1,10 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import {
+  Button,
   FormGroup,
   FormControl,
+  InputGroup,
   ControlLabel,
   Pagination
 } from "react-bootstrap";
@@ -14,6 +16,12 @@ class CustomPagination extends React.Component {
     const { target: { value } = {} } = ev;
     const parsedValue = parseInt(value); // string from select
     this.props.onCountriesOnPageChange(parsedValue);
+  };
+
+  onSearchChange = ev => {
+    const { target: { value } = {} } = ev;
+    // for training purpose - no sanitaize input
+    this.props.onSearchChange(value);
   };
 
   renderPrefixPagination() {
@@ -74,6 +82,7 @@ class CustomPagination extends React.Component {
   }
 
   render() {
+    const { search } = this.props;
     return (
       <div className="pagination">
         {this.renderPagination()}
@@ -92,17 +101,33 @@ class CustomPagination extends React.Component {
             </FormControl>
           </FormGroup>
         </div>
+        <FormGroup controlId="search-input">
+          <InputGroup>
+            <FormControl
+              type="text"
+              placeholder="Search"
+              onChange={this.onSearchChange}
+              value={search}
+            />
+          </InputGroup>
+        </FormGroup>
       </div>
     );
   }
 }
 
+// <InputGroup.Button>
+//   <Button>Search</Button>
+// </InputGroup.Button>
+
 CustomPagination.propTypes = {
   pageIndex: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
+  search: PropTypes.string.isRequired,
 
   onCountriesOnPageChange: PropTypes.func.isRequired,
-  onPageIndexChange: PropTypes.func.isRequired
+  onPageIndexChange: PropTypes.func.isRequired,
+  onSearchChange: PropTypes.func.isRequired
 };
 
 export default CustomPagination;
